@@ -9,8 +9,8 @@ let direction = 1;
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
 
-/* 🔗 LINK DO SITE */
-const SITE_URL = window.location.origin + window.location.pathname;
+/* 🔗 LINK FIXO DO GITHUB PAGES */
+const SITE_URL = "https://claramoledo.github.io/AMOR/";
 
 /* 💕 CORES DOS CORAÇÕES */
 const heartColors = ["❤️", "💖", "💜", "💙", "💚", "🧡"];
@@ -20,28 +20,31 @@ function updateCarousel() {
 
   spawnHearts();
 
-  /* Vibração suave */
+  /* Vibração suave no celular */
   if (navigator.vibrate) navigator.vibrate(40);
 
-  /* Mensagem final + QR */
+  /* 💌 Mensagem final + QR Code */
   if (index === slides.length - 1) {
     finalMessage.classList.add("show");
 
+    // GERA QR CODE CORRETO
     qrCode.src =
-      "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" +
+      "https://api.qrserver.com/v1/create-qr-code/?" +
+      "size=220x220&data=" +
       encodeURIComponent(SITE_URL);
   } else {
     finalMessage.classList.remove("show");
   }
 }
 
+/* 👉 BOTÕES */
 nextBtn.onclick = () => {
-  index = (index + 1) % slides.length;
+  index = Math.min(index + 1, slides.length - 1);
   updateCarousel();
 };
 
 prevBtn.onclick = () => {
-  index = (index - 1 + slides.length) % slides.length;
+  index = Math.max(index - 1, 0);
   updateCarousel();
 };
 
@@ -53,22 +56,24 @@ setInterval(() => {
   updateCarousel();
 }, 3500);
 
-/* 🔍 ZOOM */
+/* 🔍 ZOOM NAS IMAGENS */
 const lightbox = document.getElementById("lightbox");
 const lightImg = lightbox.querySelector("img");
 
 document.querySelectorAll("figure img").forEach(img => {
-  img.onclick = () => {
+  img.addEventListener("click", () => {
     lightImg.src = img.src;
     lightbox.classList.add("show");
-  };
+  });
 });
 
-lightbox.onclick = () => lightbox.classList.remove("show");
+lightbox.addEventListener("click", () => {
+  lightbox.classList.remove("show");
+});
 
 /* 💕 CORAÇÕES COLORIDOS */
 function spawnHearts() {
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 6; i++) {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.textContent =
