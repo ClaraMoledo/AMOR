@@ -63,3 +63,21 @@ function snow() {
   requestAnimationFrame(snow);
 }
 snow();
+
+window.addEventListener("load", () => {
+  const santa = document.getElementById("santa");
+  const paragraphs = document.querySelectorAll(".text p");
+
+  // Esconde texto no começo
+  paragraphs.forEach(p => p.style.opacity = 0);
+
+  // Depois do Papai Noel aparecer
+  setTimeout(() => {
+    paragraphs.forEach((p, i) => {
+      setTimeout(() => {
+        p.classList.add("show");
+        p.style.opacity = 1;
+      }, i * 300);
+    });
+  }, 1800); // tempo do Santa dançando primeiro
+});

@@ -11,7 +11,7 @@ const prevBtn = document.querySelector(".prev");
 
 
 /* 🔗 LINK FIXO DO GITHUB PAGES */
-const SITE_URL = "https://claramoledo.github.io/AMOR/";
+const SITE_URL = "https://claramoledo.github.io/Feliz-Natal/";
 
 /* 💕 CORES DOS CORAÇÕES */
 const heartColors = ["❤️", "💖", "💜", "💙", "💚", "🧡"];
